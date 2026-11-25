@@ -7,7 +7,7 @@ import userRoutes from './routes/users.js';
 import instructorRoutes from './routes/instructors.js';
 
 const app = express();
-
+app.set('query parser', 'simple');
 app.use(morgan('dev'));
 app.use(cors({ origin: 'http://localhost:5175', credentials: false }));
 app.use(express.json());

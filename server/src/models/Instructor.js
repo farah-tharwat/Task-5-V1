@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+
 // Instructor Portal account.
 //
 // NOTE (security lab): this model is intentionally insecure. Passwords are
@@ -11,14 +12,14 @@ const instructorSchema = new mongoose.Schema(
     name: { type: String, required: true },
     username: { type: String, required: true, unique: true, trim: true },
     // ⚠️ VULNERABLE (lab): plaintext password, no bcrypt hashing.
-    password: { type: String, required: true },
+    password: { type: String, required: true, select: false },
     department: { type: String },
     role: { type: String, default: 'instructor' }, // 'instructor' | 'superadmin'
 
     // Sensitive "trophy" fields the directory hides but injection can leak.
-    apiKey: { type: String },
-    privateEmail: { type: String },
-    privatePhone: { type: String }
+    apiKey: { type: String, select: false },
+    privateEmail: { type: String, select: false },
+    privatePhone: { type: String, select: false }
   },
   { timestamps: true }
 );
